@@ -7,13 +7,13 @@ const { request } = require("express");
 // INDEX
 // Display signup form
 exports.index = asyncHandler(async (req, res, next) => {
-  res.render("index");
+  res.render("index", { title: "Members Only" });
 });
 
 // lOGIN
 // Display signup form on get
 exports.signup_get = asyncHandler(async (req, res, next) => {
-  res.render("sign-up-form");
+  res.render("sign-up-form", { title: "Sign-up" });
 });
 
 // Handle signup form on post
@@ -42,7 +42,7 @@ exports.signup_post = [
     .toLowerCase(),
   body("password")
     .trim()
-    .MaxisStrongPassword({
+    .isStrongPassword({
       minlength: 8,
       minSymbols: 1,
     })
