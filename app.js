@@ -8,8 +8,11 @@ const LocalStrategy = require("passport-local");
 const session = require("express-session");
 require("dotenv").config();
 
+const User = require("./models/user");
+
 const indexRouter = require("./routes/index");
-const userRouter = require("./routes/user");
+const signUpRouter = require("./routes/signUp");
+const loginRouter = require("./routes/login");
 
 const app = express();
 
@@ -23,13 +26,53 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Authentication
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ email: username });
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      if (user.password !== password) {
+        return done(null, false, { message: "Incorrect password" });
+      }
+      console.log("done");
+      return done(null, user);
+    } catch (err) {
+      console.log(err);
+      return done(err);
+    }
+  })
+);
+
+// Make current logged in user available to all controllers
+// to avoid having to pass user in manually to each one
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 // Routes
 app.use("/", indexRouter);
-app.use("/users", userRouter);
+app.use("/signup", signUpRouter);
+app.use("/login", loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

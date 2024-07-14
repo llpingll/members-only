@@ -28,6 +28,7 @@
       <label for="password">Password</label>
       <input name="password" type="password" value="<%=locals.password%>" />
       <button>Sign Up</button>
+      <a href="/">Login</a>
 
       <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>
       <p><%= error %></p>

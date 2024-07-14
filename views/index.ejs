@@ -3,6 +3,25 @@
   <%- include("partials/head") %>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <% if (locals.currentUser) { %>
+    <p>Welcome back <%= locals.currentUser.firstName %></p>
+    <a href="/">LOG OUT</a>
+    <% } else { %>
+    <!-- Login form -->
+    <h1>Please log in</h1>
+    <form action="/login" method="POST">
+      <label for="username">Username</label>
+      <input
+        name="username"
+        placeholder="email"
+        type="text"
+        value="<%=locals.email%>"
+      />
+      <label for="password">Password</label>
+      <input name="password" type="password" />
+      <button>Log In</button>
+      <a href="/signup">Sign-up</a>
+    </form>
+    <% } %>
   </body>
 </html>
