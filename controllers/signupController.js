@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Message = require("../models/message");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
 // SIGNUP
 // Display signup form on get
@@ -69,7 +70,7 @@ exports.signup_post = [
     });
 
     // Check if user already exists
-    const userExists = await User.findOne({ email: req.body.email });
+    const userExists = await User.findOne({ email: req.body.email }).exec();
     if (userExists) {
       res.render("sign-up-form", {
         firstName: req.body.firstName,
@@ -83,9 +84,25 @@ exports.signup_post = [
       return;
     }
 
-    // Save user to database
-    await user.save();
-    console.log("Created");
-    res.render("index", { title: "Sign-up" });
+    //Hash plaintext password
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+      // if err, rerender form
+      if (err) {
+        res.render("sign-up-form", {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: req.body.password,
+          errors: [`hash error: ${err}`],
+        });
+        return;
+      }
+      // otherwise, store hashedPassword
+      user.password = hashedPassword;
+      // Save user to database
+      await user.save();
+      console.log("Created");
+      res.render("index", { title: "Sign-up" });
+    });
   }),
 ];
