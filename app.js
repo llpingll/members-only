@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const initializeAuth = require("./config/auth");
+const initializeAuth = require("./auth");
 
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");

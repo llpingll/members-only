@@ -5,7 +5,7 @@ const session = require("express-session");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-const User = require("../models/user");
+const User = require("./models/user");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -21,23 +21,31 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await User.findOne({ email: username }).exec();
-      if (!user) {
-        return done(null, false, { message: "Incorrect username" });
+  new LocalStrategy(
+    { passReqToCallback: true },
+    async (req, username, password, done) => {
+      try {
+        const user = await User.findOne({ email: username }).exec();
+        req.session.messages = [];
+        if (!user) {
+          return done(null, false, {
+            message: "Username and password don't match or don't exist",
+          });
+        }
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+          return done(null, false, {
+            message: "Username and password don't match or don't exist",
+          });
+        }
+        console.log("done");
+        return done(null, user);
+      } catch (err) {
+        console.log(err);
+        return done(err);
       }
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) {
-        return done(null, false, { message: "Incorrect password" });
-      }
-      console.log("done");
-      return done(null, user);
-    } catch (err) {
-      console.log(err);
-      return done(err);
     }
-  })
+  )
 );
 
 const initializeAuth = (app) => {

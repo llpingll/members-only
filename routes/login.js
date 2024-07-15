@@ -9,6 +9,7 @@ router.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/",
+    failureMessage: true,
   })
 );
 
