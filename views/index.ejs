@@ -5,7 +5,7 @@
     <h1><%= title %></h1>
     <% if (locals.currentUser) { %>
     <p>Welcome back <%= locals.currentUser.firstName %></p>
-    <a href="/">LOG OUT</a>
+    <a href="/logout">LOG OUT</a>
     <% } else { %>
     <!-- Login form -->
     <h1>Please log in</h1>

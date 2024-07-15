@@ -12,14 +12,4 @@ router.post(
   })
 );
 
-// Handle logout
-router.post("/log-out", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      next(err);
-    }
-    res.redirect("/");
-  });
-});
-
 module.exports = router;

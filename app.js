@@ -3,17 +3,12 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const session = require("express-session");
-require("dotenv").config();
-const bcrypt = require("bcryptjs");
-
-const User = require("./models/user");
+const initializeAuth = require("./config/auth");
 
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 const loginRouter = require("./routes/login");
+const logoutRouter = require("./routes/logout");
 
 const app = express();
 
@@ -27,61 +22,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Authentication
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
-
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await User.findOne({ email: username }).exec();
-      if (!user) {
-        return done(null, false, { message: "Incorrect username" });
-      }
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) {
-        return done(null, false, { message: "Incorrect password" });
-      }
-      console.log("done");
-      return done(null, user);
-    } catch (err) {
-      console.log(err);
-      return done(err);
-    }
-  })
-);
-
-app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
-
-// Make current logged in user available to all controllers
-// to avoid having to pass user in manually to each one
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  next();
-});
+initializeAuth(app);
 
 // Routes
 app.use("/", indexRouter);
 app.use("/signup", signUpRouter);
 app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
