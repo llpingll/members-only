@@ -43,6 +43,14 @@ exports.signup_post = [
     .withMessage(
       "password must be at least 8 characters long and conain at least 1 special character"
     ),
+  body("confirmPassword")
+    .trim()
+    .escape()
+    .custom((value, { req }) => {
+      console.log("value =" + value);
+      return value === req.body.password;
+    })
+    .withMessage("Confirmation does not match password"),
 
   // Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
