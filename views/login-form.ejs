@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body>
+    <%- include("partials/header") %>
+    <div class="content">
+      <form action="/login" method="POST">
+        <label for="username">Username</label>
+        <input
+          name="username"
+          placeholder="email"
+          type="text"
+          value="<%=locals.email%>"
+        />
+        <label for="password">Password</label>
+        <input name="password" type="password" />
+        <button>Log In</button>
+      </form>
+    </div>
+  </body>
+</html>

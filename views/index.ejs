@@ -2,28 +2,7 @@
 <html>
   <%- include("partials/head") %>
   <body>
-    <h1><%= title %></h1>
-    <% if (locals.currentUser) { %>
-    <p>Welcome back <%= locals.currentUser.firstName %></p>
-    <a href="/logout">LOG OUT</a>
-    <% } else { %>
-    <!-- Login form -->
-    <h1>Please log in</h1>
-    <form action="/login" method="POST">
-      <label for="username">Username</label>
-      <input
-        name="username"
-        placeholder="email"
-        type="text"
-        value="<%=locals.email%>"
-      />
-      <label for="password">Password</label>
-      <input name="password" type="password" />
-      <button>Log In</button>
-    </form>
-    <a href="/signup">Sign-up</a>
-    <% if (locals.message) {%>
-    <p><%= message %></p>
-    <% } %> <% } %>
+    <%- include("partials/header") %>
+    <div class="content">Messages here</div>
   </body>
 </html>
