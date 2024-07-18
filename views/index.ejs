@@ -3,6 +3,15 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
-    <div class="content">Messages here</div>
+    <div class="content">
+      <!-- prettier-ignore -->
+      <% if (!locals.currentUser) { %>
+        hidden 
+      <% } else if (locals.currentUser.member === false) { %>
+        hidden 
+      <% } else { %>
+        revealed
+      <% }%>
+    </div>
   </body>
 </html>

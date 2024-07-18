@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const Message = require("../models/message");
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
 
 // INDEX
 // Display index

@@ -2,7 +2,10 @@
   <a href="/"><span>Members</span>Only</a>
   <nav>
     <% if (locals.currentUser) { %>
-    <a href="/join">Become a Member</a>
+    <!-- prettier-ignore -->
+    <% if (locals.currentUser.member === false) {%>
+    <a href="/join">Become A Member</a>
+    <%}%>
     <a href="/message">New Message</a>
     <button id="account-button">
       <span>Account</span><i class="fa-solid fa-angle-down"></i>
@@ -19,7 +22,7 @@
           <%= locals.currentUser.member === false ? "Not A Member" : "Member" %>
         </p>
       </div>
-      <div><a href="/logout"></a></div>
+      <div><a href="/logout">Logout</a></div>
     </div>
     <% } else { %>
     <a href="/signup">Sign Up</a>
