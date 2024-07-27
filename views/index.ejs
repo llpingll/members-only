@@ -5,13 +5,19 @@
     <%- include("partials/header") %>
     <div class="content">
       <!-- prettier-ignore -->
-      <% if (!locals.currentUser) { %>
-        hidden 
-      <% } else if (locals.currentUser.member === false) { %>
-        hidden 
-      <% } else { %>
-        revealed
-      <% }%>
+      <% locals.messages.forEach(message => { %>
+        <div class="message"></div>
+          <p><%= message.title %></p>
+          <p><%= message.content %></p>
+          <hr>
+          <% if (!locals.currentUser) {%>
+            <p><strong>Note:</strong> Author and date can only be seen by members</p>
+          <%} else {%>
+            <p>By <%= message.author.firstName %></p>
+            <p><%= message.date %></p>
+          <% } %>
+        </div>
+      <% }) %>
     </div>
   </body>
 </html>

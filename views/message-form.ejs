@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+  <body>
+    <%- include("partials/header") %>
+    <div class="content">
+      <form action="/message" method="POST">
+        <label for="title">Title</label>
+        <input name="title" type="text" value="<%=locals.title%>" />
+        <label for="content">Message</label>
+        <textarea name="content" type="text"><%=locals.content%></textarea>
+        <button>Submit</button>
+      </form>
+      <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>
+      <p><%= error.msg %></p>
+      <% }); %> <% } %>
+    </div>
+  </body>
+</html>

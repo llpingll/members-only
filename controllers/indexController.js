@@ -5,5 +5,11 @@ const asyncHandler = require("express-async-handler");
 // INDEX
 // Display index
 exports.index = asyncHandler(async (req, res, next) => {
-  res.render("index", { title: "Members Only", message: req.session.messages });
+  // Get messages
+  const messages = await Message.find().populate("author").exec();
+  res.render("index", {
+    title: "Members Only",
+    message: req.session.messages,
+    messages: messages,
+  });
 });
