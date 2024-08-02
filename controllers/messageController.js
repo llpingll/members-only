@@ -22,8 +22,7 @@ exports.message_post = [
     .isLength({ min: 3, max: 15 })
     .withMessage("Title must be between 3 and 15 characters")
     .isAlphanumeric()
-    .withMessage("Title name must contian alphabetical characters only")
-    .toLowerCase(),
+    .withMessage("Title name must contian alphabetical characters only"),
   body("content")
     .trim()
     .isLength({ min: 3, max: 500 })

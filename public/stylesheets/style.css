@@ -13,39 +13,99 @@ body {
   font-size: 20px;
 }
 
+body h2 {
+  padding: 20px 0;
+  text-align: center;
+  background-color: rgb(251 251 251);
+  margin-bottom: 20px;
+}
+
 /* HEADER */
 header {
-  font-size: 22px;
+  font-size: 14px;
   font-weight: 700;
-  border: red 2px solid;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-header :first-child span {
-  color: blueviolet;
-}
-
-nav {
-  font-size: 14px;
+  padding: 20px 50px;
+  font-size: 24px;
 }
 
 a {
   text-decoration: none;
 }
 
+header .button {
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.margin {
+  margin-left: 20px;
+}
+
+button {
+  font-size: 14px;
+}
+
+button i {
+  padding-left: 10px;
+}
+
+header :first-child span {
+  color: blueviolet;
+  font-size: 24px;
+}
+
+nav {
+  font-size: 14px;
+}
+
 /* account button */
+#account-button {
+  background-color: transparent;
+  border: solid 1px blueviolet;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .account-details {
   display: none;
   position: absolute;
+  top: 65px;
+  right: 50px;
   background-color: white;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: grey;
+  border-radius: 10px;
 }
 
 .account-details.visible {
   display: block;
+}
+
+.account-details > div {
+  margin: 10px 0;
+}
+
+.logout {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.account-details > div > p {
+  margin: 10px 0;
+}
+
+.name,
+.member {
+  color: black;
+  font-size: 16px;
 }
 
 /* CONTENT */
@@ -53,4 +113,52 @@ a {
   border: blue 2px solid;
   display: flex;
   justify-content: center;
+}
+
+/* MESSAGES */
+.msg-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 50px;
+  border: rgb(229, 231, 235) 1px solid;
+  border-radius: 10px;
+  padding: 20px;
+  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+    0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: 0 0 #0000, 0 0 #0000, var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.title {
+  font-weight: 700;
+}
+
+.txt-content {
+  font-size: 16px;
+}
+
+.author,
+.date {
+  font-size: 14px;
+}
+
+.author {
+  font-weight: 600;
+  margin-bottom: -10px;
+}
+
+.author span,
+.date {
+  color: gray;
+  font-weight: 500;
 }

@@ -3,20 +3,23 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
-    <div class="content">
+    <h2>Messages</h2>
+    <div class="msg-content">
       <!-- prettier-ignore -->
       <% locals.messages.forEach(message => { %>
-        <div class="message"></div>
-          <p><%= message.title %></p>
-          <p><%= message.content %></p>
-          <hr>
-          <% if (!locals.currentUser) {%>
-            <p><strong>Note:</strong> Author and date can only be seen by members</p>
-          <%} else {%>
-            <p>By <%= message.author.firstName %></p>
-            <p><%= message.date %></p>
-          <% } %>
-        </div>
+      <div class="message">
+        <p class="title"><%= message.title %></p>
+        <p class="txt-content"><%= message.content %></p>
+        <hr />
+        <% if (!locals.currentUser) {%>
+        <p>
+          <strong>Note:</strong> Author and date can only be seen by members
+        </p>
+        <%} else {%>
+        <p class="author"><span>By</span> <%= message.author.firstName %></p>
+        <p class="date"><%= message.date %></p>
+        <% } %>
+      </div>
       <% }) %>
     </div>
   </body>
