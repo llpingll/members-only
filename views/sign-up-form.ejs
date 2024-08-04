@@ -3,36 +3,55 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
+    <h2>Sign Up</h2>
     <div class="content">
-      <h1>Sign Up</h1>
-      <form action="" method="POST">
-        <label for="firstName">First name</label>
-        <input
-          name="firstName"
-          placeholder="firstName"
-          type="text"
-          value="<%=locals.firstName%>"
-        />
-        <label for="lastName">Last name</label>
-        <input
-          name="lastName"
-          placeholder="lastName"
-          type="text"
-          value="<%=locals.lastName%>"
-        />
-        <label for="email">Email</label>
-        <input
-          name="email"
-          placeholder="johndoe@gmail.com"
-          type="email"
-          value="<%=locals.email%>"
-        />
-        <label for="password">Password</label>
-        <input name="password" type="password" value="<%=locals.password%>" />
-        <label for="confirmPassword">Confirm Password</label>
-        <input name="confirmPassword" type="password" />
-        <button>Sign Up</button>
-        <a href="/login">Login</a>
+      <form class="signup-form" action="" method="POST">
+        <div>
+          <div class="single">
+            <label for="firstName">First name</label>
+            <input
+              name="firstName"
+              placeholder="firstName"
+              type="text"
+              value="<%=locals.firstName%>"
+            />
+          </div>
+          <div class="single">
+            <label for="lastName">Last name</label>
+            <input
+              name="lastName"
+              placeholder="lastName"
+              type="text"
+              value="<%=locals.lastName%>"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="single email">
+            <label for="email">Email</label>
+            <input
+              name="email"
+              placeholder="johndoe@gmail.com"
+              type="email"
+              value="<%=locals.email%>"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="single">
+            <label for="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              value="<%=locals.password%>"
+            />
+          </div>
+          <div class="single">
+            <label for="confirmPassword">Confirm Password</label>
+            <input name="confirmPassword" type="password" />
+          </div>
+        </div>
+        <button class="button submit">Sign Up</button>
 
         <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>
         <p><%= error.msg %></p>

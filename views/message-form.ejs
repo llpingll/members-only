@@ -3,13 +3,18 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
+    <h2>Create Message</h2>
     <div class="content">
       <form action="/message" method="POST">
-        <label for="title">Title</label>
-        <input name="title" type="text" value="<%=locals.title%>" />
-        <label for="content">Message</label>
-        <textarea name="content" type="text"><%=locals.content%></textarea>
-        <button>Submit</button>
+        <div class="single">
+          <label for="title">Title</label>
+          <input name="title" type="text" value="<%=locals.title%>" />
+        </div>
+        <div class="single">
+          <label for="content">Message</label>
+          <textarea name="content" type="text"><%=locals.content%></textarea>
+        </div>
+        <button class="button submit">Submit</button>
       </form>
       <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>
       <p><%= error.msg %></p>
