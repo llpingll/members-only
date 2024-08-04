@@ -6,8 +6,8 @@
     <% if (locals.currentUser.member === false) {%>
     <a class="button" href="/join">Become A Member</a>
     <%}%>
-    <a class="button margin" href="/message">New Message</a>
-    <button class="margin" id="account-button">
+    <a class="button" href="/message">New Message</a>
+    <button id="account-button">
       <span>Account</span><i class="fa-solid fa-angle-down"></i>
     </button>
     <div id="account-details" class="account-details">
@@ -30,7 +30,7 @@
     </div>
     <% } else { %>
     <a class="button" href="/signup">Sign Up</a>
-    <a class="button margin" href="/login">Log In</a>
+    <a class="button" href="/login">Log In</a>
     <% } %>
   </nav>
 </header>
