@@ -21,6 +21,10 @@
         </div>
         <button class="button submit">Log In</button>
       </form>
+
+      <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>
+      <p><%= error %></p>
+      <% }); %> <% } %>
     </div>
   </body>
 </html>

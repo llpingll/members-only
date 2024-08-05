@@ -11,7 +11,12 @@
           <input name="password" type="text" />
         </div>
         <button class="button submit">Join</button>
-        <p>Secret password can be found <a href="">here</a></p>
+        <p class="password">
+          Secret password can be found
+          <a href="https://github.com/llpingll/members-only/blob/main/README.md"
+            >here</a
+          >
+        </p>
       </form>
 
       <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>

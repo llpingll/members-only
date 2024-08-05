@@ -25,9 +25,9 @@ exports.signup_post = [
     .trim()
     .escape()
     .isLength({ min: 3, Max: 10 })
-    .withMessage("First name must be between 1 and 10 characters")
+    .withMessage("Last name must be between 1 and 10 characters")
     .isAlphanumeric()
-    .withMessage("First name must contian alphabetical characters only")
+    .withMessage("Last name must contian alphabetical characters only")
     .toLowerCase(),
   body("email")
     .trim()

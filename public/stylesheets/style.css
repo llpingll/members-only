@@ -113,6 +113,8 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .message {
@@ -159,8 +161,14 @@ nav {
 /* SIGNUP */
 .content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   padding: 0 20px;
+}
+
+.content > p {
+  align-self: center;
+  margin-top: 10px;
+  color: red;
 }
 
 form {
@@ -170,6 +178,11 @@ form {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-self: center;
+}
+
+.password {
+  align-self: center;
 }
 
 .row {

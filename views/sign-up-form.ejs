@@ -52,11 +52,10 @@
           </div>
         </div>
         <button class="button submit">Sign Up</button>
-
-        <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>
-        <p><%= error.msg %></p>
-        <% }); %> <% } %>
       </form>
+      <% if (locals.errors) {%> <% locals.errors.forEach((error) => { %>
+      <p><%= error.msg %></p>
+      <% }); %> <% } %>
     </div>
   </body>
 </html>

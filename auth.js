@@ -38,7 +38,6 @@ passport.use(
             message: "Username and password don't match or don't exist",
           });
         }
-        console.log("done");
         return done(null, user);
       } catch (err) {
         console.log(err);
