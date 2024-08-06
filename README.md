@@ -14,4 +14,4 @@ This project was meant to practice full-stack development with a focus on authen
 
 🔑 Secret Code (case-sensitive): The Odin Project
 
-[Live Demo](https://inventory-app-dawn-butterfly-8941.fly.dev/) :point_left:
+[Live Demo](https://members-only-8581.fly.dev/) :point_left:
