@@ -69,6 +69,12 @@ exports.signup_post = [
       return;
     }
 
+    // Capitalize first letter of firstName and lastName
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+    req.body.firstName = capitalize(req.body.firstName);
+    req.body.lastName = capitalize(req.body.lastName);
+
     // Create user
     const user = new User({
       firstName: req.body.firstName,
@@ -110,7 +116,8 @@ exports.signup_post = [
       // Save user to database
       await user.save();
       console.log("Created");
-      res.render("index", { title: "Sign-up" });
+      const messages = await Message.find().populate("author").exec();
+      res.render("index", { messages: messages });
     });
   }),
 ];

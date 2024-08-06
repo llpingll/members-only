@@ -8,8 +8,6 @@ exports.index = asyncHandler(async (req, res, next) => {
   // Get messages
   const messages = await Message.find().populate("author").exec();
   res.render("index", {
-    title: "Members Only",
-    message: req.session.messages,
     messages: messages,
   });
 });
