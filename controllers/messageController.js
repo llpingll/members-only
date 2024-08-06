@@ -46,7 +46,7 @@ exports.message_post = [
       return;
     }
 
-    // Create user
+    // Create message
     const message = new Message({
       title: req.body.title,
       content: req.body.content,
@@ -54,7 +54,7 @@ exports.message_post = [
       date: new Date(),
     });
 
-    //Hash plaintext password
+    //Save message
     await message.save();
     console.log("Created");
     res.redirect("/");

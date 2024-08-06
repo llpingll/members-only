@@ -4,6 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const initializeAuth = require("./auth");
+const formatDate = require("./public/javascripts/formatDate");
 
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
@@ -23,6 +24,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+// Middleware to make the helper available in all views
+app.use((req, res, next) => {
+  res.locals.formatDate = formatDate;
+  next();
+});
 
 // Authentication
 initializeAuth(app);

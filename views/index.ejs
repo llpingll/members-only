@@ -11,13 +11,13 @@
         <p class="title"><%= message.title %></p>
         <p class="txt-content"><%= message.content %></p>
         <hr />
-        <% if (!locals.currentUser) {%>
+        <% if (locals.currentUser && locals.currentUser.member) {%>
+        <p class="author"><span>By</span> <%= message.author.firstName %></p>
+        <p class="date"><%= formatDate(message.date) %></p>
+        <%} else {%>
         <p>
           <strong>Note:</strong> Author and date can only be seen by members
         </p>
-        <%} else {%>
-        <p class="author"><span>By</span> <%= message.author.firstName %></p>
-        <p class="date"><%= message.date %></p>
         <% } %>
       </div>
       <% }) %>

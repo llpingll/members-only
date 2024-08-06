@@ -59,7 +59,7 @@ const initializeAuth = (app) => {
   app.use(passport.session());
   app.use(express.urlencoded({ extended: false }));
 
-  // Make current logged in user available to all controllers
+  // Make current logged in user available to all views
   app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
