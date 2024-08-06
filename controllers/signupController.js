@@ -47,7 +47,6 @@ exports.signup_post = [
     .trim()
     .escape()
     .custom((value, { req }) => {
-      console.log("value =" + value);
       return value === req.body.password;
     })
     .withMessage("Confirmation does not match password"),
@@ -58,7 +57,6 @@ exports.signup_post = [
     const errors = validationResult(req);
     // Rerender form with sanitized values if validation errors exist
     if (!errors.isEmpty()) {
-      console.log(`rerender ${errors}`);
       res.render("sign-up-form", {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -115,7 +113,6 @@ exports.signup_post = [
       user.password = hashedPassword;
       // Save user to database
       await user.save();
-      console.log("Created");
       const messages = await Message.find().populate("author").exec();
       res.render("index", { messages: messages });
     });

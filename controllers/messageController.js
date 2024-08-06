@@ -37,7 +37,6 @@ exports.message_post = [
     const errors = validationResult(req);
     // Rerender form with sanitized values if validation errors exist
     if (!errors.isEmpty()) {
-      console.log(`rerender ${errors}`);
       res.render("message-form", {
         title: req.body.title,
         content: req.body.content,
@@ -56,7 +55,6 @@ exports.message_post = [
 
     //Save message
     await message.save();
-    console.log("Created");
     res.redirect("/");
   }),
 ];
