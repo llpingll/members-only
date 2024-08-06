@@ -3,6 +3,8 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const compression = require("compression");
+const helmet = require("helmet");
 const initializeAuth = require("./auth");
 const formatDate = require("./public/javascripts/formatDate");
 
@@ -18,7 +20,31 @@ const app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+// Set up rate limiter: maximum of twenty requests per minute
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 30,
+});
 
+app.use(limiter); // Apply rate limiter to all requests
+app.use(compression()); // Compress all routes
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      scriptSrc: [
+        "'self'",
+        "https://kit.fontawesome.com", // Allow Font Awesome scripts
+        "'unsafe-inline'", // For inline scripts if necessary
+      ],
+      connectSrc: ["'self'", "*"],
+    },
+    reportOnly: false, // Enforce the policy
+    setAllHeaders: false,
+    disableAndroid: false,
+    browserSniff: true,
+  })
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
